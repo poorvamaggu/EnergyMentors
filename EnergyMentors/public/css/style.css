@@ -1,0 +1,293 @@
+@import url("https://fonts.googleapis.com/css2?family=Monda&display=swap");
+
+* {
+  font-family: "Monda", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 5rem 10rem;
+  background-color: #f5f5f9;
+}
+
+.heading {
+  text-align: center;
+  text-transform: uppercase;
+  margin: 5rem;
+  color: #7f82ff;
+  text-shadow: 2px 2px 4px rgba(194, 194, 194, 0.1);
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading h1 {
+  background-color: #fff;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.base-case {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  position: relative;
+}
+
+.bg-image {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+}
+
+.bg-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cases {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  min-width: 28rem;
+  left: 0;
+}
+
+.cases-heading {
+  color: #7f82ff;
+}
+
+.case-data {
+  background-color: #fff;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0.5rem;
+  flex-wrap: wrap;
+}
+
+.base-case-row {
+  width: 28rem;
+  min-width: 20rem;
+}
+
+.base-case-field {
+  padding: 0rem 0.8rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+}
+
+.base-case-values p {
+  margin-top: 0.5rem;
+}
+
+.case-logos {
+  height: 25px;
+  padding: 5px;
+  border-radius: 10px;
+  filter: invert(1) drop-shadow(0 0 0.75rem #b8b8b8);
+  background-color: #e7e7ff;
+}
+
+.filter-row {
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
+  flex-wrap: nowrap;
+}
+
+.filter {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: 9.5rem;
+  width: 9.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  flex-wrap: nowrap;
+}
+
+.filter:hover {
+  scale: 1.05;
+  transition: all 0.2s ease-in-out;
+}
+
+.filter p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #7f82ff;
+}
+
+.filter span {
+  position: absolute;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #7f82ff;
+  bottom: 10px;
+}
+
+.filter-logos {
+  height: 90px;
+  background-color: #fff;
+}
+
+.chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem;
+  width: 30rem;
+  height: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.case {
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: calc(100vw/3);
+  margin: 1rem;
+  margin-top: 0rem;
+  min-width: 26rem;
+}
+
+.case-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.all-cases {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.all-cases-heading {
+  margin: 1rem;
+  color: #7f82ff;
+}
+
+.inactive {
+  display: none;
+}
+
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.active-block {
+  display: block;
+}
+
+#lineChart {
+  width: 400px;
+  height: 400px;
+}
+
+.atom-image {
+  background-color: #fff;
+  width: 33.33%;
+  margin: 1rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.atom-image img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  animation: rotate infinite 15s linear;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.cases-filter,
+.chart {
+  height: 26rem;
+  width: 28rem;
+}
+
+.base-case {
+  height: 24rem;
+}
+
+@media (max-width:900px) {
+  body{
+    margin: 5rem 0rem;
+  }
+}
+
+@media (max-width: 500px){
+
+  .heading {
+    margin: 2rem;
+    font-size: 1rem;
+  }
+
+  .cases{
+    min-width: 23rem;
+    margin-right: 3rem;
+  }
+
+  .case {
+    min-width: 22rem;
+  }
+
+  .base-case{
+    min-width: 20rem;
+  }
+
+  .base-case-row{
+    width: 18rem;
+  }
+
+  p{
+    font-size: 0.8rem;
+  }
+
+  .case-logos img{
+    height: 20px;
+    width: auto;
+  }
+
+}

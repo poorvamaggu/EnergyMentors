@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Energy Supply and Demand</title>
+
+    <link rel="stylesheet" href="public/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="heading">
+        <h1>Energy Supply & Demand</h1>
+    </div>
+
+    <!-- ------------------------------------------------------------------------------ -->
+
+    <div class="row" style="flex-wrap: wrap; justify-content: center;">
+
+        <div class="base-case column" id="base-case">
+            <div class="cases-heading">
+                <h2>Base Case</h2>
+            </div>
+
+            <div class="case-data">
+                <div class="row base-case-row">
+                    <div class="column base-case-field">
+                        <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                        <p>POWER DEMAND (MW)</p>
+                    </div>
+                    <div class="column base-case-values">
+                        <p>05 MW</p>
+                    </div>
+                </div>
+                <div class="row base-case-row">
+                    <div class="column base-case-field">
+                        <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                        <p>SOLAR PV GENERATION (MW)</p>
+                    </div>
+                    <div class="column base-case-values">
+                        <p>05 MW</p>
+                    </div>
+                </div>
+                <div class="row base-case-row">
+                    <div class="column base-case-field">
+                        <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                        <p>FUEL CELL GENERATION (MW)</p>
+                    </div>
+                    <div class="column base-case-values">
+                        <p>05 MW</p>
+                    </div>
+                </div>
+                <div class="row base-case-row">
+                    <div class="column base-case-field">
+                        <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                        <p>GRID SUPPLY POWER (MW)</p>
+                    </div>
+                    <div class="column base-case-values">
+                        <p>15 MW</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-image">
+                <img src="public/images/logos/bg/wave-haikei (1).png" alt="">
+            </div>
+
+        </div>
+
+        <!-- ------------------------------------------------------------------------------ -->
+
+        <div class="cases-filter column">
+            <div class="row filter-row">
+                <div class="column filter" id="hourly" onclick="filterFunction('hourly')">
+                    <img class="filter-logos" src="/public/images/logos/filter/hour.png" alt="">
+                    <p>HOURLY</p>
+                    <span class="spans inactive" id="hourly-span">_</span>
+                </div>
+                <div class="column filter" id="weekly" onclick="filterFunction('weekly')">
+                    <img class="filter-logos" src="/public/images/logos/filter/week.png" alt="">
+                    <p>WEEKLY</p>
+                    <span class="spans inactive" id="weekly-span">_</span>
+                </div>
+            </div>
+            <div class="row filter-row">
+                <div class="column filter" id="monthly" onclick="filterFunction('monthly')">
+                    <img class="filter-logos" style="height: 90px; margin-top: -5px;"
+                        src="/public/images/logos/filter/month.png" alt="">
+                    <p>MONTHLY</p>
+                    <span class="spans inactive" id="monthly-span">_</span>
+                </div>
+                <div class="column filter" id="yearly" onclick="filterFunction('yearly')">
+                    <img class="filter-logos" src="/public/images/logos/filter/year.png" alt="">
+                    <p>YEARLY</p>
+                    <span class="spans inactive" id="yearly-span">_</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ------------------------------------------------------------------------------ -->
+
+        <div class="chart column">
+            <div class="row chart-row">
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ------------------------------------------------------------------------------ -->
+
+    <div class="cases" id="hourly-cases-filter">
+        <div class="all-cases-heading">
+            <h2>HOURLY</h2>
+        </div>
+        <div class="all-cases">
+            <div class="case">
+                <div class="case-heading">
+                    <h4>INSTANT NORMAL CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyHourly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case">
+                <div class="case-heading">
+                    <h4>LOW DEMAND CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandLowHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVLowHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellLowHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyLowHourly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case">
+                <div class="case-heading">
+                    <h4>HIGH DEMAND CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandHighHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVHighHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellHighHourly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyHighHourly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------------------------------------------------------------ -->
+
+    <div class="cases" id="weekly-cases-filter">
+        <div class="all-cases-heading">
+            <h2>WEEKLY</h2>
+        </div>
+        <div class="all-cases">
+            <div class="case">
+                <div class="case-heading">
+                    <h4>LOW DEMAND CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandLowWeekly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVLowWeekly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellLowWeekly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyLowWeekly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case">
+                <div class="case-heading">
+                    <h4>HIGH DEMAND CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandHighWeekly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVHighWeekly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellHighWeekly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyHighWeekly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------------------------------------------------------------ -->
+
+    <div class="cases" id="monthly-cases-filter">
+        <div class="all-cases-heading">
+            <h2>MONTHLY</h2>
+        </div>
+        <div class="all-cases">
+            <div class="case">
+                <div class="case-heading">
+                    <h4>LOW DEMAND CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandLowMonthly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVLowMonthly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellLowMonthly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyLowMonthly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case">
+                <div class="case-heading">
+                    <h4>HIGH DEMAND CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandHighMonthly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVHighMonthly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellHighMonthly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyHighMonthly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------------------------------------------------------------ -->
+
+    <div class="cases" id="yearly-cases-filter">
+        <div class="all-cases-heading">
+            <h2>YEARLY</h2>
+        </div>
+        <div class="all-cases">
+            <div class="case">
+                <div class="case-heading">
+                    <h4>LOW DEMAND CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandLowYearly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVLowYearly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellLowYearly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyLowYearly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="case">
+                <div class="case-heading">
+                    <h4>HIGH DEMAND CASE</h4>
+                </div>
+                <div class="case-content">
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/power.png" alt="">
+                            <p>POWER DEMAND (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="powerDemandHighYearly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/solar.png" alt="">
+                            <p>SOLAR PV GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="solarPVHighYearly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/fuelcell.png" alt="">
+                            <p>FUEL CELL GENERATION (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="fuelCellHighYearly">05 MW</p>
+                        </div>
+                    </div>
+                    <div class="row case-row">
+                        <div class="column case-field">
+                            <img class="case-logos" src="/public/images/logos/base/supply.png" alt="">
+                            <p>GRID SUPPLY POWER (MW)</p>
+                        </div>
+                        <div class="column case-values">
+                            <p id="gridSupplyHighYearly">15 MW</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ------------------------------------------------------------------------------ -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="public/js/app.js"></script>
+</body>
+
+</html>
